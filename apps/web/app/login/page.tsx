@@ -16,7 +16,7 @@ import NextLink from "next/link";
 import ErrorToast from "@/components/ErrorToast/ErrorToast";
 
 const LoginPage = () => {
-  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isError, errorMessage } =
+  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isError, errorMessage, isLoading } =
     useLogin();
 
   return (
@@ -66,6 +66,7 @@ const LoginPage = () => {
               type="submit"
               variant="contained"
               fullWidth
+              loading={isLoading}
             >
               Login
             </Button>

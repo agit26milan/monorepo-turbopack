@@ -8,7 +8,7 @@ import ErrorToast from '@/components/ErrorToast/ErrorToast';
 
 
 const RegisterContainer = () => {
-  const {onRegisterUser, onChangeEmail, onChangePassword, isError, errorMessage} = useRegister()
+  const {onRegisterUser, onChangeEmail, onChangePassword, isError, errorMessage, isDisableBtn, isLoading} = useRegister()
     return (
        <Box
       sx={{
@@ -58,7 +58,7 @@ const RegisterContainer = () => {
       }}
               onChange={onChangePassword}
             />
-            <Button onClick={onRegisterUser} type="submit" variant="contained" fullWidth>
+            <Button loading={isLoading} disabled={isDisableBtn()} onClick={onRegisterUser} type="submit" variant="contained" fullWidth>
               Register
             </Button>
    
