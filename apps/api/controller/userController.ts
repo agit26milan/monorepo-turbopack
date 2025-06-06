@@ -13,3 +13,4 @@ export const getUserById = async (req: Request, res: Response) => {
   }
   res.json(user);
 };
+

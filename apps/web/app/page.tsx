@@ -1,10 +1,11 @@
-"use client"
-import AuthContainer from "@/container/auth/AuthContainer";
+
+// import AuthContainer from "@/container/login/LoginContainer";
+
 
 export default function Home() {
   return (
     <div >
-      <AuthContainer></AuthContainer>
+      main
     </div>
   );
 }

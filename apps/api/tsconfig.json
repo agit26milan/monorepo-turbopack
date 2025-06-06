@@ -6,6 +6,7 @@
     "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true              /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,
+    "resolveJsonModule": true              /* Skip type checking all .d.ts files. */
   }
 }
