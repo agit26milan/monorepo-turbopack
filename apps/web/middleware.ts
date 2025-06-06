@@ -11,7 +11,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Specify the paths where the middleware applies
 export const config = {
-  matcher: ['/admin/:path*', '/dashboard/:path*'], // Adjust as needed
+  matcher: ['/dashboard/:path*'],
 };
