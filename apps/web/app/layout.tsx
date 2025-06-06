@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: "Frontend app",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

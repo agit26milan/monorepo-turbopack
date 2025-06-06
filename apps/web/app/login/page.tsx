@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 // import NavbarComponent from '@/components/navbar'
-import React from 'react'
+import React from "react";
 import {
   Box,
   Button,
@@ -10,39 +10,39 @@ import {
   Paper,
   Stack,
   Link,
-} from '@mui/material';
-import useLogin from './hooks/useLogin';
+} from "@mui/material";
+import useLogin from "./hooks/useLogin";
 import NextLink from "next/link";
+import ErrorToast from "@/components/ErrorToast/ErrorToast";
 
+const LoginPage = () => {
+  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isError, errorMessage } =
+    useLogin();
 
-const LoaginPage = () => {
-    const {} = useLogin()
-
-    return (
-        <React.Fragment>
-        <Box
-      sx={{
-        height: '100vh',
-        bgcolor: '#f5f5f5',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Paper
-        elevation={3}
+  return (
+    <React.Fragment>
+      <Box
         sx={{
-          p: 4,
-          width: 360,
-          bgcolor: '#fff',
-          borderRadius: 2,
+          height: "100vh",
+          bgcolor: "#f5f5f5",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Typography variant="h5" mb={2} textAlign="center">
-          Login
-        </Typography>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 4,
+            width: 360,
+            bgcolor: "#fff",
+            borderRadius: 2,
+          }}
+        >
+          <Typography variant="h5" mb={2} textAlign="center">
+            Login
+          </Typography>
 
-        <form >
           <Stack spacing={2}>
             <TextField
               label="Email"
@@ -50,6 +50,7 @@ const LoaginPage = () => {
               fullWidth
               required
               variant="outlined"
+              onChange={onChangeEmail}
             />
             <TextField
               label="Password"
@@ -57,22 +58,28 @@ const LoaginPage = () => {
               fullWidth
               required
               variant="outlined"
+              onChange={onChangePassword}
             />
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              onClick={onLoginUser}
+              disabled={isDisableLoginButton()}
+              type="submit"
+              variant="contained"
+              fullWidth
+            >
               Login
             </Button>
-                      <Link component={NextLink} href={"/register"} >
-                      <Typography  variant="subtitle1" textAlign="center">
-                    Don&apos;t have an account? Register
-                    </Typography>
-                    </Link>
+            <Link component={NextLink} href={"/register"}>
+              <Typography variant="subtitle1" textAlign="center">
+                Don&apos;t have an account? Register
+              </Typography>
+            </Link>
           </Stack>
-        </form>
-      </Paper>
-    </Box>
-        </React.Fragment>
-    )
-}
+        </Paper>
+      </Box>
+      <ErrorToast isOpen={isError} message={errorMessage} />
+    </React.Fragment>
+  );
+};
 
-
-export default LoaginPage
+export default LoginPage;

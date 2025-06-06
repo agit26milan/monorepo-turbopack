@@ -1,14 +1,15 @@
-export interface User {
-  id: string;
-  name: string;
-}
+import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
+import admin, { adminAuth } from "../firebase/admin";
 
-const users: User[] = [
-  { id: '1', name: 'Alice' },
-  { id: '2', name: 'Bob' }
-];
+export interface User extends DecodedIdToken {}
 
 export const UserRepository = {
-  getAll: async (): Promise<User[]> => users,
-  getById: async (id: string): Promise<User | undefined> => users.find(u => u.id === id),
+  getByToken: async (token: string): Promise<User | undefined> => {
+    try {
+      const response = await adminAuth.verifyIdToken(token);
+      return response;
+    } catch (e) {
+      return undefined;
+    }
+  },
 };
