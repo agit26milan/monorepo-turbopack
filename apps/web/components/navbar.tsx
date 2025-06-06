@@ -52,4 +52,4 @@ const NavbarComponent = () => {
   );
 }
 
-export default NavbarComponent
+export default React.memo(NavbarComponent) 

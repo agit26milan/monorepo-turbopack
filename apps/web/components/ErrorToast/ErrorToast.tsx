@@ -1,5 +1,5 @@
 "use client";
-
+import React from 'react'
 import { Snackbar, Alert } from "@mui/material";
 
 interface ErrorToastProps {
@@ -24,4 +24,4 @@ const ErrorToast: React.FC<ErrorToastProps> = (props) => {
   );
 };
 
-export default ErrorToast;
+export default React.memo(ErrorToast);
