@@ -1,5 +1,5 @@
 import { UserRepository } from '../repository/userRepository';
 
 export const UserService = {
-  getUserByToken: async (token:string) => UserRepository.getByToken(token)
+  getUserData: async (id:string) => UserRepository.getUserDocumentByUserId(id)
 };

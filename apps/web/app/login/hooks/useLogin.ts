@@ -4,13 +4,13 @@ import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { auth } from "@/lib/Firebase";
+import { useAppDispatch } from "@/store/store";
+import { setErrorAction } from "@/store/actions/errorAction";
 const useLogin = () => {
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const [isError, setIsError] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -25,7 +25,6 @@ const useLogin = () => {
   };
 
   const onLoginUser = async () => {
-    setIsError(false);
     setIsLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
@@ -36,13 +35,8 @@ const useLogin = () => {
       setIsLoading(false);
     } catch (error) {
       if (error instanceof FirebaseError) {
-        setIsError(true);
-        setErrorMessage(error.message);
+        dispatch(setErrorAction(error.message));
         setIsLoading(false);
-
-        setTimeout(() => {
-          setIsError(false);
-        }, 1000);
       }
     }
   };
@@ -52,9 +46,7 @@ const useLogin = () => {
     onChangePassword,
     isDisableLoginButton,
     onLoginUser,
-    isError,
-    errorMessage,
-    isLoading
+    isLoading,
   };
 };
 

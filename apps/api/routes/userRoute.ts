@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { authMiddleware } from '../middleware/authMiddleware';
-import { getUserByToken } from '../controller/userController';
+import { getUserDocument } from '../controller/userController';
 const userRouter = Router();
 
-userRouter.get('/detail', authMiddleware, getUserByToken);
+userRouter.get('/detail', authMiddleware, getUserDocument);
 
 export default userRouter;

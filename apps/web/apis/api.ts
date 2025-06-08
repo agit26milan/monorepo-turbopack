@@ -23,8 +23,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   response => response,
   async error => {
+    console.log(error, 'saman')
     if (error?.response?.status === 401) {
-     document.cookie = ''
+     document.cookie = 'token=';
+     window.location.reload()
     }
     return Promise.reject(error);
   },

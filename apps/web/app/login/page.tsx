@@ -1,6 +1,4 @@
 "use client";
-
-// import NavbarComponent from '@/components/navbar'
 import React from "react";
 import {
   Box,
@@ -13,10 +11,9 @@ import {
 } from "@mui/material";
 import useLogin from "./hooks/useLogin";
 import NextLink from "next/link";
-import ErrorToast from "@/components/ErrorToast/ErrorToast";
 
 const LoginPage = () => {
-  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isError, errorMessage, isLoading } =
+  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isLoading } =
     useLogin();
 
   return (
@@ -78,7 +75,6 @@ const LoginPage = () => {
           </Stack>
         </Paper>
       </Box>
-      <ErrorToast isOpen={isError} message={errorMessage} />
     </React.Fragment>
   );
 };

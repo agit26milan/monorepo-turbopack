@@ -4,11 +4,10 @@ import { Box, Button, TextField, Typography, Paper, Stack, Link, IconButton, Inp
 import NextLink from "next/link";
 import useRegister from './hooks/useRegister';
 import { VisibilityOff } from '@mui/icons-material';
-import ErrorToast from '@/components/ErrorToast/ErrorToast';
 
 
 const RegisterContainer = () => {
-  const {onRegisterUser, onChangeEmail, onChangePassword, isError, errorMessage, isDisableBtn, isLoading} = useRegister()
+  const {onRegisterUser, onChangeEmail, onChangePassword, isDisableBtn, isLoading} = useRegister()
     return (
        <Box
       sx={{
@@ -69,7 +68,6 @@ const RegisterContainer = () => {
                 </Link>
           </Stack>
       </Paper>
-      <ErrorToast isOpen={isError} message={errorMessage} />
     </Box>
     )
 }

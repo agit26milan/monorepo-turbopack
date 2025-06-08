@@ -18,7 +18,8 @@ export const authMiddleware = async (
   }
     const idToken = authHeader.split('Bearer ')[1];
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const decodedToken = await admin.auth().verifyIdToken(idToken, true);
+    console.log({decodedToken}, 'polo')
     req.user = decodedToken;
     next();
   } catch (error) {

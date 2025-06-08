@@ -1,5 +1,7 @@
 import api from "@/apis/api";
 import { API_PATH } from "@/apis/path";
+import { setErrorAction } from "@/store/actions/errorAction";
+import { useAppDispatch } from "@/store/store";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -7,9 +9,8 @@ const useRegister = () => {
   const navigation = useRouter();
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const [isError, setIsError] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useAppDispatch();
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -32,18 +33,13 @@ const useRegister = () => {
         url: API_PATH.REGISTER,
       });
       document.cookie = `token=${response.data.idToken}`;
-      console.log({ response }, "reg response");
-      //   dispatch({type: SAVE_DATA_USER, payload: response.data});
       setIsLoading(false);
       navigation.replace("/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
-        setErrorMessage(error.response?.data?.data?.message);
-        setIsError(true);
+        console.log({error},'jlak')
+        dispatch(setErrorAction(error.response?.data.data?.message));
         setIsLoading(false);
-        setTimeout(() => {
-          setIsError(false);
-        }, 1000);
       }
     }
   };
@@ -56,10 +52,8 @@ const useRegister = () => {
     onChangeEmail,
     onChangePassword,
     onRegisterUser,
-    isError,
-    errorMessage,
     isDisableBtn,
-    isLoading
+    isLoading,
   };
 };
 

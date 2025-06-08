@@ -2,6 +2,7 @@
 "use client"
 import React from 'react'
 import useDashboard from './hooks/useDashboard'
+import NavbarComponent from '@/components/Navbar/Navbar'
 
 
 const DashboardPage = () => {
@@ -12,7 +13,9 @@ const DashboardPage = () => {
     }, [])
 
     return (
-      <div>Dashboard</div>
+      <React.Fragment>
+        <NavbarComponent />
+      </React.Fragment>
     )
 }
 
