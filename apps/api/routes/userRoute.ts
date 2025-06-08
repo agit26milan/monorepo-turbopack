@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { authMiddleware } from '../middleware/authMiddleware';
-import { getUserDocument } from '../controller/userController';
+import { getUserDocument, updateUserData } from '../controller/userController';
 const userRouter = Router();
 
 userRouter.get('/detail', authMiddleware, getUserDocument);
+userRouter.patch('/update-data-user', authMiddleware, updateUserData)
 
 export default userRouter;

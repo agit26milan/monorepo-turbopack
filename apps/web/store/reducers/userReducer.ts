@@ -11,6 +11,8 @@ export interface User {
   totalAverageWeightRatings?: number;
   numberOfRents?: number;
   recentlyActive?: number;
+  phone?:string;
+  address?:string
 }
 interface UserReduxProps {
   user: User;

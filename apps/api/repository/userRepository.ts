@@ -16,6 +16,13 @@ export interface UserDocument {
   recentlyActive?: number;
 }
 
+export interface UserUpdate {
+  name?: string
+  email: string
+  address?:string
+  phone?:string
+}
+
 export const UserRepository = {
   getByToken: async (token: string): Promise<User | null> => {
     try {
@@ -60,4 +67,26 @@ export const UserRepository = {
       return null;
     }
   },
+  updateUserData: async (dataUser:UserDocument, updateDataUser:any) => {
+    try {
+      const whiteListPayload = ['email', 'name', 'phone', 'address']
+      let payload:any = {}
+      Object.keys(updateDataUser).forEach((key) => {
+        if(whiteListPayload.includes(key) && updateDataUser[key] && updateDataUser[key] !== '') {
+          payload = {...payload, [key]: updateDataUser[key]}
+        }
+      })
+      if(dataUser.uid) {
+        if(payload?.email && dataUser.email !== payload?.email) {
+          await admin.auth().updateUser(dataUser.uid, {email: payload?.email})
+        }
+        const response = await admin.firestore().collection(USER_PATH).doc(dataUser.uid).update(payload)
+        return {...response, isChangeEmail: payload?.email !== dataUser.email}
+      } else {
+        return null
+      }
+    }catch(e) {
+      return null
+    }
+  }
 };

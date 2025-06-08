@@ -8,12 +8,15 @@ import {
   Paper,
   Stack,
   Link,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import useLogin from "./hooks/useLogin";
 import NextLink from "next/link";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginPage = () => {
-  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isLoading } =
+  const { onChangeEmail, onChangePassword, isDisableLoginButton, onLoginUser, isLoading, showPassword, togglePass } =
     useLogin();
 
   return (
@@ -51,11 +54,20 @@ const LoginPage = () => {
             />
             <TextField
               label="Password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               fullWidth
               required
               variant="outlined"
               onChange={onChangePassword}
+              InputProps={{
+              endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={togglePass}  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+                )
+              }}
             />
             <Button
               onClick={onLoginUser}

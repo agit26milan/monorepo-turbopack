@@ -1,17 +1,16 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { auth } from "@/lib/Firebase";
 import { useAppDispatch } from "@/store/store";
-import { setErrorAction } from "@/store/actions/errorAction";
+import { setErrorAction } from "@/store/actions/toastAction";
 const useLogin = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false)
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -29,9 +28,8 @@ const useLogin = () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       const token = await response.user.getIdToken();
-      console.log({ response, token }, "sasa");
       document.cookie = `token=${token}`;
-      router.replace("/dashboard");
+      location.reload()
       setIsLoading(false);
     } catch (error) {
       if (error instanceof FirebaseError) {
@@ -41,12 +39,19 @@ const useLogin = () => {
     }
   };
 
+  const togglePass = () => {
+    console.log('polo')
+    setShowPassword((prevState) => !prevState)
+  }
+
   return {
     onChangeEmail,
     onChangePassword,
     isDisableLoginButton,
     onLoginUser,
     isLoading,
+    showPassword,
+    togglePass
   };
 };
 

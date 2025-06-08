@@ -30,3 +30,13 @@ export const getUserDocument = async (req: AuthenticatedRequest, res: Response) 
       .json(new ResponseEntity(FAILED_STATUS, null, "Cannot get user uid"));
   }
 };
+
+export const updateUserData = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const user = req.user ||{}
+    const response = await UserService.updateUserData(user, req.body)
+    res.status(200).json(new ResponseEntity(SUCCESS_STATUS, response, "Success update user data"))
+  }catch(e) {
+    res.status(400).json(new ResponseEntity(FAILED_STATUS, null, "Failed update user data"))
+  }
+}

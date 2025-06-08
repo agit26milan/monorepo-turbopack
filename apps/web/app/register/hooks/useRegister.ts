@@ -1,6 +1,6 @@
 import api from "@/apis/api";
 import { API_PATH } from "@/apis/path";
-import { setErrorAction } from "@/store/actions/errorAction";
+import { setErrorAction } from "@/store/actions/toastAction";
 import { useAppDispatch } from "@/store/store";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,6 @@ const useRegister = () => {
       navigation.replace("/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log({error},'jlak')
         dispatch(setErrorAction(error.response?.data.data?.message));
         setIsLoading(false);
       }

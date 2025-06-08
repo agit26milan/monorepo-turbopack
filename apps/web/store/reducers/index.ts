@@ -1,11 +1,11 @@
 
 import { combineReducers } from "@reduxjs/toolkit";
 import UserReducer from "./userReducer";
-import ErrorReducer from "./errorReducer";
+import ToastReducer from "./toastReducer";
 
 const appReducers = combineReducers({
   user: UserReducer,
-  error: ErrorReducer
+  toast: ToastReducer
 });
 
 export default appReducers;

@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react'
 import { Snackbar, Alert } from "@mui/material";
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { resetErrorAction } from '@/store/actions/errorAction';
+import { resetErrorAction } from '@/store/actions/toastAction';
 
 
 const ErrorToast = () => {
-  const error = useAppSelector((state) => state.error.error)
+  const error = useAppSelector((state) => state.toast.error)
   const dispatch = useAppDispatch()
   useEffect(() => {
     if(error?.type) {
@@ -22,7 +22,7 @@ const ErrorToast = () => {
       open={Boolean(error?.type)}
       autoHideDuration={4000}
     >
-      <Alert severity="error" variant="filled">
+      <Alert severity={error?.type || 'success'} variant="filled">
         {error?.message}
       </Alert>
     </Snackbar>

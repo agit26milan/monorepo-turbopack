@@ -19,11 +19,9 @@ export const authMiddleware = async (
     const idToken = authHeader.split('Bearer ')[1];
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken, true);
-    console.log({decodedToken}, 'polo')
     req.user = decodedToken;
     next();
   } catch (error) {
-    console.error('Firebase token verification failed:', error);
     res.status(401).json({ error: 'Unauthorized: Invalid token' });
   }
 };
