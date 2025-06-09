@@ -42,8 +42,10 @@ const LoginPage = () => {
           <Typography variant="h5" mb={2} textAlign="center">
             Login
           </Typography>
-
+     
           <Stack spacing={2}>
+          <form onSubmit={onLoginUser} >
+            <Stack spacing={2} >
             <TextField
               label="Email"
               type="email"
@@ -70,7 +72,6 @@ const LoginPage = () => {
               }}
             />
             <Button
-              onClick={onLoginUser}
               disabled={isDisableLoginButton()}
               type="submit"
               variant="contained"
@@ -79,6 +80,10 @@ const LoginPage = () => {
             >
               Login
             </Button>
+            </Stack>
+            
+          </form>
+            
             <Link component={NextLink} href={"/register"}>
               <Typography variant="subtitle1" textAlign="center">
                 Don&apos;t have an account? Register

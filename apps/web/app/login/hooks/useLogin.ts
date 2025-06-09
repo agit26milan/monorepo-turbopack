@@ -1,7 +1,7 @@
 "use client";
 import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
+import React, { FormEvent } from "react";
 import { auth } from "@/lib/Firebase";
 import { useAppDispatch } from "@/store/store";
 import { setErrorAction } from "@/store/actions/toastAction";
@@ -23,7 +23,8 @@ const useLogin = () => {
     return email?.length === 0 || password?.length === 0 || isLoading;
   };
 
-  const onLoginUser = async () => {
+  const onLoginUser = async (event:FormEvent<HTMLFormElement>) => {
+    event?.preventDefault()
     setIsLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);

@@ -29,7 +29,7 @@ const NavbarComponent = () => {
       router.replace('/login')
     }catch(error) {
       if(error instanceof FirebaseError) {
-        console.log({error},'sas')
+        console.log({error},'error')
       }
     }
   }

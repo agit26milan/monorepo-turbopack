@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/store/store";
 import { AxiosError } from "axios";
 import { signInWithCustomToken } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { FormEvent } from "react";
 const useRegister = () => {
   const navigation = useRouter();
   const [email, setEmail] = React.useState<string>("");
@@ -23,7 +23,8 @@ const useRegister = () => {
     setPassword(event.target.value);
   };
 
-  const onRegisterUser = async () => {
+  const onRegisterUser = async (event: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
     try {
       setIsLoading(true);
       const payload = {
@@ -35,10 +36,11 @@ const useRegister = () => {
         data: payload,
         url: API_PATH.REGISTER,
       });
-      console.log({response},'simak')
-      const signData = await signInWithCustomToken(auth, response.data.data.token)
-      const token = await signData.user.getIdToken()
-      console.log({token})
+      const signData = await signInWithCustomToken(
+        auth,
+        response.data.data.token
+      );
+      const token = await signData.user.getIdToken();
       document.cookie = `token=${token}`;
       setIsLoading(false);
       navigation.replace("/dashboard");
@@ -55,7 +57,6 @@ const useRegister = () => {
   };
 
   const togglePass = () => {
-    console.log("polo");
     setShowPassword((prevState) => !prevState);
   };
 

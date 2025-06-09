@@ -28,7 +28,7 @@ const DashboardPage = () => {
         <Typography variant="h5" gutterBottom>
           Profile Information
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate autoComplete="off">
+        <Box component="form" onSubmit={handleSubmit} autoComplete="off">
           <Grid container spacing={2}>
             <Grid component={'div'} size={{lg: 12}} >
               <TextField InputLabelProps={{ shrink: true }} name='name' defaultValue={user?.name} fullWidth label="Full Name" variant="outlined" />
