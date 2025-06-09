@@ -4,6 +4,8 @@ This Turborepo starter is maintained by the Turborepo core team.
 
 # Run the projecte
 
+Please use node version 20 or higher
+
 To run this project you can start with the following command
 1. `yarn install` to install the dependencies
 2. `yarn start` to start the BE and FE project
