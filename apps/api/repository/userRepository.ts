@@ -1,5 +1,5 @@
 import admin, { adminAuth } from "../firebase/admin";
-import { UserRecord } from "firebase-admin/lib/auth/user-record";
+import { UserRecord } from "firebase-admin/auth";
 import { USER_PATH } from "../firebase/pathCollection";
 
 export interface User extends UserRecord {}

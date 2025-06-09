@@ -6,6 +6,6 @@ if (!admin.apps.length) {
     credential: admin.credential.cert(account),
   });
 }
-export const adminAuth = admin.auth()
+export const adminAuth = admin.auth();
 
 export default admin;

@@ -9,7 +9,10 @@
     "dev:web": "turbo run dev --filter=web",
     "dev:api": "turbo run dev --filter=api",
     "dev": "concurrently \"npm run dev:web\" \"npm run dev:api\"",
-    "build:functions": "turbo run build --filter=functions"
+    "build:functions": "turbo run serve --filter=functions",
+    "build:web": "turbo run build --filter=web",
+    "start:web": "turbo run start --filter=web",
+    "start": "concurrently \"npm run build:functions\"  \"npm run dev:web\""
   },
   "devDependencies": {
     "prettier": "^3.5.3",

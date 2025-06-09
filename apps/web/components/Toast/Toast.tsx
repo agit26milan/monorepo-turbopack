@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from 'react'
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, AlertColor } from "@mui/material";
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { resetErrorAction } from '@/store/actions/toastAction';
 
@@ -22,7 +22,7 @@ const ErrorToast = () => {
       open={Boolean(error?.type)}
       autoHideDuration={4000}
     >
-      <Alert severity={error?.type || 'success'} variant="filled">
+      <Alert severity={error?.type as AlertColor} variant="filled">
         {error?.message}
       </Alert>
     </Snackbar>

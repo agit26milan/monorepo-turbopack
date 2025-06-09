@@ -1,8 +1,10 @@
+import { AlertColor, AlertPropsColorOverrides } from "@mui/material";
 import { ReduxActionProps } from "../interfaces";
 import { RESET_ERROR_GLOBAL, SET_ERROR_GLOBAL, SET_SUCCESS_GLOBAL } from "../types";
+import { OverridableStringUnion } from '@mui/types';
 
 export interface Error {
-  type:string
+  type:OverridableStringUnion<AlertColor, AlertPropsColorOverrides>
   message:string
 }
 interface UserReduxProps {

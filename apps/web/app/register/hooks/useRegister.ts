@@ -1,8 +1,10 @@
 import api from "@/apis/api";
 import { API_PATH } from "@/apis/path";
+import { auth } from "@/lib/Firebase";
 import { setErrorAction } from "@/store/actions/toastAction";
 import { useAppDispatch } from "@/store/store";
 import { AxiosError } from "axios";
+import { signInWithCustomToken } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import React from "react";
 const useRegister = () => {
@@ -11,6 +13,7 @@ const useRegister = () => {
   const [password, setPassword] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useAppDispatch();
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -32,7 +35,11 @@ const useRegister = () => {
         data: payload,
         url: API_PATH.REGISTER,
       });
-      document.cookie = `token=${response.data.idToken}`;
+      console.log({response},'simak')
+      const signData = await signInWithCustomToken(auth, response.data.data.token)
+      const token = await signData.user.getIdToken()
+      console.log({token})
+      document.cookie = `token=${token}`;
       setIsLoading(false);
       navigation.replace("/dashboard");
     } catch (error) {
@@ -47,12 +54,19 @@ const useRegister = () => {
     return email.length === 0 || password.length === 0 || isLoading;
   };
 
+  const togglePass = () => {
+    console.log("polo");
+    setShowPassword((prevState) => !prevState);
+  };
+
   return {
     onChangeEmail,
     onChangePassword,
     onRegisterUser,
     isDisableBtn,
     isLoading,
+    togglePass,
+    showPassword,
   };
 };
 

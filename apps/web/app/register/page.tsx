@@ -3,11 +3,11 @@ import React from 'react'
 import { Box, Button, TextField, Typography, Paper, Stack, Link, IconButton, InputAdornment } from "@mui/material";
 import NextLink from "next/link";
 import useRegister from './hooks/useRegister';
-import { VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
 const RegisterContainer = () => {
-  const {onRegisterUser, onChangeEmail, onChangePassword, isDisableBtn, isLoading} = useRegister()
+  const {onRegisterUser, onChangeEmail, onChangePassword, isDisableBtn, isLoading, showPassword, togglePass} = useRegister()
     return (
        <Box
       sx={{
@@ -41,16 +41,15 @@ const RegisterContainer = () => {
             />
             <TextField
               label="Password"
-              type="password"
+              type={showPassword? 'text' : 'password'}
               fullWidth
               required
               variant="outlined"
               InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton  edge="end">
-              <VisibilityOff />
-              {/* {showPassword ? <VisibilityOff /> : <Visibility />} */}
+            <IconButton onClick={togglePass} edge="end">
+              {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         )

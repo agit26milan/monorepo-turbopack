@@ -40,7 +40,6 @@ const useLogin = () => {
   };
 
   const togglePass = () => {
-    console.log('polo')
     setShowPassword((prevState) => !prevState)
   }
 
