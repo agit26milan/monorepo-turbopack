@@ -7,6 +7,8 @@ This Turborepo starter is maintained by the Turborepo core team.
 To run this project you can start with the following command
 1. `yarn install` to install the dependencies
 2. `yarn start` to start the BE and FE project
+3. `Backend` will run on port 4200
+4. `Frontend` will run on port 3100
 
 
 # What's inside?
